@@ -6,10 +6,10 @@ import 'home.dart';
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark),
   );
-
   runApp(const MyApp());
 }
 

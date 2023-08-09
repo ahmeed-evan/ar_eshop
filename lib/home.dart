@@ -1,5 +1,7 @@
-import 'package:ar_e_shop/category.dart';
+import 'package:ar_e_shop/domain/category.dart';
 import 'package:ar_e_shop/main.dart';
+import 'package:ar_e_shop/domain/product_details.dart';
+import 'package:ar_e_shop/screen/product_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +25,37 @@ class Home extends StatelessWidget {
         "Bed", Icon(Icons.bed, color: Colors.black.withOpacity(.4), size: 30)),
     Category("Lamp",
         Icon(Icons.light, color: Colors.black.withOpacity(.4), size: 30)),
+  ];
+
+  final List<ProductDetails> productList = [
+    ProductDetails(
+        productPrice: "\$ 12.00",
+        productName: "Black Simple Lamp",
+        productURL: "assets/images/Mask Group.png",
+        productRatting: 4.5,
+        productDescription:
+            "Minimal Stand is made of by natural wood. The design that is very simple and minimal. This is truly one of the best furnitures in any family for now. With 3 different colors, you can easily select the best match for your home."),
+    ProductDetails(
+        productPrice: "\$ 25.00",
+        productName: "Minimal Stand",
+        productURL: "assets/images/Mask Group (1).png",
+        productRatting: 4.5,
+        productDescription:
+            "Minimal Stand is made of by natural wood. The design that is very simple and minimal. This is truly one of the best furnitures in any family for now. With 3 different colors, you can easily select the best match for your home."),
+    ProductDetails(
+        productPrice: "\$ 30.00",
+        productName: "Coffee Chair",
+        productURL: "assets/images/Mask Group (2).png",
+        productRatting: 4.5,
+        productDescription:
+            "Minimal Stand is made of by natural wood. The design that is very simple and minimal. This is truly one of the best furnitures in any family for now. With 3 different colors, you can easily select the best match for your home."),
+    ProductDetails(
+        productPrice: "\$ 50.00",
+        productName: "Simple Desk",
+        productURL: "assets/images/Mask Group (3).png",
+        productRatting: 4.5,
+        productDescription:
+            "Minimal Stand is made of by natural wood. The design that is very simple and minimal. This is truly one of the best furnitures in any family for now. With 3 different colors, you can easily select the best match for your home."),
   ];
 
   @override
@@ -118,27 +151,67 @@ class Home extends StatelessWidget {
   }
 
   _productList() {
-    return Container(
-      padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 100,
-        itemBuilder: (context, index) => _productCard(),
+    return GridView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: productList.length,
+      itemBuilder: (context, index) => InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductDetailScreen(
+                        productDetails: productList[index],
+                      )),
+            );
+          },
+          child: _productCard(index)),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 20,
+        childAspectRatio: .6,
       ),
     );
   }
 
-  _productCard() {
+  _productCard(int index) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 200,
-          decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage('assets/images/Mask Group.png'))
-          ),
-        )
-        // Image(image: AssetImage("assets/images/Mask Group.png"))
+        Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.asset(productList[index].productURL ?? ""),
+            ),
+            Positioned(
+              bottom: 16,
+              right: 16,
+              child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.circular(6),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: .5,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 1), // changes position of shadow
+                        ),
+                      ]),
+                  child: Icon(
+                    Icons.shopping_bag_outlined,
+                    color: Colors.grey.shade400,
+                  )),
+            ),
+          ],
+        ),
+        customHeight(10),
+        Text(productList[index].productName ?? ""),
+        customHeight(10),
+        Text(productList[index].productPrice ?? ""),
       ],
     );
   }
