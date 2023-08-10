@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'home.dart';
+import 'screen/home.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+        statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark),
   );
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: _themeData, home:  Home());
+    return MaterialApp(theme: _themeData, home: Home());
   }
 }
 
@@ -35,3 +35,12 @@ ThemeData _themeData = ThemeData(
 SizedBox customHeight(double height) => SizedBox(height: height);
 
 SizedBox customWeight(double weight) => SizedBox(width: weight);
+
+TextStyle defaultTestStyle =
+    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
+TextStyle smallTestStyle =
+    const TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
+TextStyle largeTestStyle =
+    const TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
+TextStyle titleTestStyle =
+    const TextStyle(fontSize: 24, fontWeight: FontWeight.w500);
