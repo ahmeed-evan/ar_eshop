@@ -1,9 +1,10 @@
 import 'package:ar_e_shop/domain/category.dart';
-import 'package:ar_e_shop/main.dart';
 import 'package:ar_e_shop/domain/product_details.dart';
-import 'package:ar_e_shop/screen/product_details.dart';
+import 'package:ar_e_shop/screen/view/product_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../util/utils.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);

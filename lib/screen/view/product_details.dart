@@ -1,6 +1,10 @@
 import 'package:ar_e_shop/domain/product_details.dart';
 import 'package:ar_e_shop/main.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../util/utils.dart';
+import '../widget/custom_button.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   const ProductDetailScreen({Key? key, required this.productDetails})
@@ -12,7 +16,11 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
-  final List<Color> colorsList = [Colors.white, Colors.red, Colors.green];
+  final List<Color> colorsList = [
+    Colors.white,
+    Colors.deepOrangeAccent,
+    Colors.blueGrey
+  ];
 
   int selectedIndex = 0;
   int addedItemCount = 0;
@@ -26,14 +34,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   _body(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _topLayout(context),
-          _contentLayout(),
-          const Spacer(),
-        ],
-      ),
+      physics: const AlwaysScrollableScrollPhysics(),
+      child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _topLayout(context),
+              _contentLayout(),
+              const Spacer(),
+              _buttonLayout(),
+              customHeight(20),
+            ],
+          )),
     );
   }
 
@@ -60,6 +73,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             child: _diffColorSwitch(),
             top: MediaQuery.of(context).viewPadding.top + 100,
             left: 16),
+        Positioned(
+            bottom: 20,
+            right: 20,
+            child: Icon(
+              CupertinoIcons.viewfinder_circle,
+              color: Colors.grey.shade400,
+              size: 32,
+            ))
       ],
     );
   }
@@ -95,7 +116,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ],
           ),
           customHeight(16),
-          Text(widget.productDetails.productDescription??"",style: defaultTestStyle),
+          Text(widget.productDetails.productDescription ?? "",
+              style: defaultTestStyle),
         ],
       ),
     );
@@ -236,6 +258,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  _buttonLayout() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {},
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.grey.shade300,
+              ),
+              child: const Icon(Icons.bookmark_border, size: 12),
+            ),
+          ),
+          customWeight(20),
+          Expanded(
+            child: customButton(
+                buttonColor: Colors.black,
+                buttonText: "Add to cart",
+                onButtonClick: () {},
+                textColor: Colors.white),
+          )
+        ],
+      ),
     );
   }
 }

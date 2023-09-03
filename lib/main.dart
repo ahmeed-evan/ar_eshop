@@ -1,7 +1,9 @@
+import 'package:ar_e_shop/screen/view/app_entry.dart';
+import 'package:ar_e_shop/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'screen/home.dart';
+import 'screen/view/home.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
@@ -19,28 +21,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: _themeData, home: Home());
+    return MaterialApp(theme: themeData, home: AppEntry());
   }
 }
-
-ThemeData _themeData = ThemeData(
-  // scaffoldBG, applicable for aLL PAGES
-  scaffoldBackgroundColor: Colors.white,
-  //primary color for the application
-  colorScheme: ColorScheme.fromSwatch().copyWith(
-    primary: Colors.black,
-  ),
-);
-
-SizedBox customHeight(double height) => SizedBox(height: height);
-
-SizedBox customWeight(double weight) => SizedBox(width: weight);
-
-TextStyle defaultTestStyle =
-    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500);
-TextStyle smallTestStyle =
-    const TextStyle(fontSize: 14, fontWeight: FontWeight.w500);
-TextStyle largeTestStyle =
-    const TextStyle(fontSize: 18, fontWeight: FontWeight.w500);
-TextStyle titleTestStyle =
-    const TextStyle(fontSize: 24, fontWeight: FontWeight.w500);
